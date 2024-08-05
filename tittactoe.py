@@ -21,14 +21,17 @@ def printBoard(xstate , ystate):
 
 def checkWin(xstate ,ystate):
     wins =[ [0,1,2], [3,4,5], [6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]]
+    # Check for each winning combination
     for win in wins:
         if(sum(xstate[win[0]], xstate[win[1]], xstate[win[2]])== 3):
-            print
+            print("X WINS")
             return 1
         if(sum(ystate[win[0]], ystate[win[1]], ystate[win[2]])== 3):
+            print("O WINS")
             return 0
+    
     return -1
-       
+
 
 
 if __name__ == "__main__":
@@ -50,6 +53,11 @@ if __name__ == "__main__":
         cWin= checkWin(xstate , ystate)
         if cWin != -1:
             print("Match Over")
+            break
+
+        # Check for draw
+        if all(xstate[i] == 1 or ystate[i] == 1 for i in range(9)):
+            print("Match Draw")
             break
 
         chance = 1 - chance
